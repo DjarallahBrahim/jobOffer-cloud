@@ -1,4 +1,4 @@
-resource  "google_computeFirewall" "allow_internal_communication" {
+resource  "google_compute_firewall" "allow_internal_communication" {
     name = "allow-interna-communicaion"
     network = google_compute_network.default.id
     allow {
@@ -6,7 +6,7 @@ resource  "google_computeFirewall" "allow_internal_communication" {
         ports = ["0-65535"]
     }
 
-    source_range = ["10.0.0.0/8"]
+    source_ranges = ["10.0.0.0/8"]
     # Allow all internal TCP traffic within the VPC (between Kafka, producer, consumer, MySQL)
     target_tags = [
     "kafka-service",    # For Kafka instances
@@ -16,7 +16,7 @@ resource  "google_computeFirewall" "allow_internal_communication" {
 }
 
 
-resource "google_computeFirewall" "allow_react_http" {
+resource "google_compute_firewall" "allow_react_http" {
     name = "allow-react-http"
     network = google_compute_network.default.id
 
@@ -31,7 +31,7 @@ resource "google_computeFirewall" "allow_react_http" {
 }
 
 # Firewall to allow Kafka communication (Kafka & Producer services)
-resource "google_computeFirewall" "allow_kafka_producer" {
+resource "google_compute_firewall" "allow_kafka_producer" {
   name    = "allow-kafka-producer"
   network = google_compute_network.default.id
 
@@ -52,7 +52,7 @@ resource "google_computeFirewall" "allow_kafka_producer" {
 }
 
 # Firewall to allow MySQL communication between instances (Producer, Consumer)
-resource "google_computeFirewall" "allow_mysql_access" {
+resource "google_compute_firewall" "allow_mysql_access" {
   name    = "allow-mysql-access"
   network = google_compute_network.default.id
 
@@ -70,7 +70,7 @@ resource "google_computeFirewall" "allow_mysql_access" {
 }
 
 # Optional: Allow SSH access to instances for administrative purposes
-resource "google_computeFirewall" "allow_ssh_access" {
+resource "google_compute_firewall" "allow_ssh_access" {
   name    = "allow-ssh-access"
   network = google_compute_network.default.id
 
