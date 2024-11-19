@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  
+  producer-1:
+    image: djarallahbrahim/job-offer-producer-ws:main
+    user: 'root'
+    ports:
+      - 8098:8080
+    environment:
+      - SPRING_APPLICATION_NAME=kafka-ws
+      - SERVER_PORT=8080
+      - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=*
+      - SPRING_KAFKA_PRODUCER_BOOTSTRAP_SERVERS=kafka.service.jobstream:9092
+      - SPRING_KAFKA_PRODUCER_KEY_SERIALIZER=org.apache.kafka.common.serialization.StringSerializer
+      - SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER=org.springframework.kafka.support.serializer.JsonSerializer
+      - SPRING_KAFKA_PRODUCER_ENABLE_IDEMPOTENCE=true
+      - SPRING_KAFKA_PRODUCER_MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION=5
+      - SPRING_KAFKA_PRODUCER_ACKS=all
+      - SPRING_KAFKA_PRODUCER_PROPERTIES_LINGER_MS=0
+      - SPRING_KAFKA_PRODUCER_PROPERTIES_REQUEST_TIMEOUT_MS=30000
+      - SPRING_KAFKA_PRODUCER_PROPERTIES_DELIVERY_TIMEOUT_MS=120000
+      - TOPIC_KAFKA_NAME=job-offer-events-topic
+      - SPRING_DATASOURCE_URL=jdbc:mysql://10.173.0.3:3306/jobstream
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=r00t
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+      - logging.level.org.apache.kafka=DEBUG
+      - logging.level.org.springframework.kafka=DEBUG
