@@ -13,6 +13,9 @@ resource  "google_compute_firewall" "allow_internal_communication" {
     "producer-service", # For Producer instances
     "consumer-service"  # For Consumer instances
     ]
+    lifecycle {
+    prevent_destroy = true
+  }
 }
 
 
@@ -28,6 +31,9 @@ resource "google_compute_firewall" "allow_react_http" {
 
     source_ranges = ["0.0.0.0/0"]
     target_tags = ["react-frontend"]
+    lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Firewall to allow Kafka communication (Kafka & Producer services)
@@ -49,6 +55,9 @@ resource "google_compute_firewall" "allow_kafka_producer" {
     "kafka-service",    # Kafka instance
     "producer-service"  # Producer instance (on Compute Engine or Cloud Run)
   ]
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Firewall to allow MySQL communication between instances (Producer, Consumer)
@@ -67,6 +76,9 @@ resource "google_compute_firewall" "allow_mysql_access" {
   
   # Target tag for MySQL database (Cloud SQL)
   target_tags = ["mysql-database"]
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Optional: Allow SSH access to instances for administrative purposes
@@ -89,4 +101,23 @@ resource "google_compute_firewall" "allow_ssh_access" {
     "producer-service", # Producer instance
     "consumer-service"  # Consumer instance
   ]
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+
+resource "google_compute_firewall" "allow_icmp_custom" {
+  name          = "allow-icmp-custom"
+  network = google_compute_network.default.id
+  target_tags   = ["kafka-service", "producer-service", "consumer-service"]
+  source_ranges = ["0.0.0.0/0"]
+
+  allow {
+    protocol = "icmp"
+  }
+  lifecycle {
+    prevent_destroy = true
+  }
+
 }

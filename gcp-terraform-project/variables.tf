@@ -39,3 +39,9 @@ variable "client_email" {
   type        = string
   default     = "kafka-instance@credible-bridge-440508-u0.iam.gserviceaccount.com"  # Replace with actual service account email
 }
+
+variable "db_root_password" {
+  description = "password for db user"
+  type        = string
+  default     = "samtyga"
+}
