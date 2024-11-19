@@ -1,6 +1,24 @@
 # Changelog
 
-## [1.2.0] - 2024-11-18
+## [2024-11-19] - Deploy MySQL Instance in Private Network
+
+### Added
+- Configured a **MySQL instance** on Google Cloud using Terraform.
+- Enabled **private IP connectivity** for the MySQL instance to ensure secure access within the `custom-vpc` network.
+- Reserved a global internal IP range for VPC peering using `google_compute_global_address` with `VPC_PEERING` purpose.
+- Established a service networking connection between `custom-vpc` and Google-managed services for private connectivity.
+- Set up the MySQL instance to use a private network for communication instead of public IP.
+- Verified proper connectivity to the MySQL instance (`10.173.0.3`) via Kafka services deployed in the same VPC.
+
+### Updated
+- Updated `firewall` rules for `custom-vpc` to allow internal communication within the private subnet.
+
+### Notes
+- Private Service Access (PSA) was enabled for the `sql-subnet` to facilitate private connectivity.
+- Public IP connectivity for the MySQL instance was explicitly disabled.
+- Kafka and other services can now securely connect to the MySQL instance using its private IP.
+
+## [2024-11-18] 
 ### Added
 - Deployed Kafka on GCP with Docker containers using Terraform.
 - Configured private DNS for internal communication between Kafka and other services (`kafka.service.jobstream`).
@@ -14,7 +32,7 @@
 - Updated firewall rules to ensure secure communication between Kafka, producer, consumer, and Cloud SQL (MySQL).
 - Adjusted internal DNS for Kafka communication to be accessible via `kafka.service.jobstream`.
 
-## [1.1.0] - 2024-11-17
+## [2024-11-17] 
 ### Added
 - **GCP Infrastructure Setup** for JobOffer application using **Terraform**.
 - Configured a **VPC** with private and public subnets to host various services securely.
