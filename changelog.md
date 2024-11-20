@@ -1,5 +1,18 @@
 # Changelog
 
+
+### Added [2024-11-20] - Deployed a Kafka consumer
+
+- **Kafka Consumer Deployment**
+  - Deployed a Kafka consumer instance within the private network (`custom-vpc`).
+  - Configured internal connectivity to Kafka and MySQL using private IPs.
+  - Updated firewall rules:
+    - Allowed traffic for Kafka and MySQL communication within the private network.
+  - Verified end-to-end communication with Kafka and MySQL services.
+
+### Notes
+- The Kafka consumer instance was set up in the same private network as Kafka and MySQL for optimized performance and security.
+
 ## [2024-11-19] - Deploy MySQL Instance in Private Network
 
 ### Added

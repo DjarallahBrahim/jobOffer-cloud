@@ -86,6 +86,13 @@ resource "google_compute_instance" "kafka_instance" {
     access_config {}  # No external IP by default
   }
 
+  lifecycle {
+    ignore_changes = [
+      network_interface[0].subnetwork_project,
+      metadata["ssh-keys"]
+    ]
+  }
+
   tags = ["kafka-service"]
 
   metadata = {
@@ -103,24 +110,5 @@ resource "google_compute_instance" "kafka_instance" {
     scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
-  }
-}
-
-resource "google_compute_instance" "instance2" {
-  name         = "my-vm"
-  machine_type = "n1-standard-1"
-  zone         = "us-central1-a"
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-12-bookworm-v20231010"
-    }
-  }
-
-  tags = ["kafka-service"]
-  network_interface {
-    subnetwork_project = google_compute_network.default.id
-    subnetwork         = google_compute_subnetwork.compute_subnet.id  # Using the subnet created in step 1
-    access_config {}  # No external IP by default
   }
 }
