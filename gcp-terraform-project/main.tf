@@ -16,3 +16,14 @@ resource "google_storage_bucket" "default" {
     enabled = true
   }
 }
+
+
+module "gke" {
+  source            = "./modules/gke" # Path to your GKE module
+  project_id        = var.project_id
+  region            = var.region
+  network_name      = google_compute_network.default.name
+  subnetwork_name   = google_compute_subnetwork.cluster_subnet.name
+  service_account             = var.service_account
+
+}
