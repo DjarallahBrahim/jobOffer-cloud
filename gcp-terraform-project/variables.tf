@@ -45,3 +45,9 @@ variable "db_root_password" {
   type        = string
   default     = "samtyga"
 }
+
+variable "terraform_state_file_version" {
+  description = "terraform-state-file-version"
+  type        = string
+  default     = "0-2"
+}

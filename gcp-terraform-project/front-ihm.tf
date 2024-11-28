@@ -16,7 +16,7 @@ resource "google_cloud_run_v2_service" "frontend" {
 
     scaling {
       max_instance_count = 5
-      min_instance_count= 1
+      min_instance_count= 0
     }
       containers {
         image = "djarallahbrahim/jobstream-front:0.0.4"
@@ -25,7 +25,7 @@ resource "google_cloud_run_v2_service" "frontend" {
           }
         env {
           name = "MY_APP_API_BASE_URL"
-          value = "https://job-offer-producer-416597012245.us-central1.run.app"
+          value = "https://job-offer-producer-416597012245.us-central1.run.app/job-offer-producer"
         }
         resources {
           limits = {

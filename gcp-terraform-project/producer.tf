@@ -16,7 +16,7 @@ resource "google_cloud_run_v2_service" "producer" {
 
     scaling {
       max_instance_count = 5
-      min_instance_count= 1
+      min_instance_count= 0
     }
       containers {
         image = "djarallahbrahim/job-offer-producer-ws:main"
