@@ -2,6 +2,11 @@
 this project will deploy job-offer application to the cloud (GCP , Openshift Kubernetes and in local with docker-compose)
 
 
+## Schema
+![Schema](schema.png)
+
+
+
 # GCP Infrastructure Setup with Terraform
 
 This project provides a step-by-step setup for deploying a web application infrastructure on Google Cloud Platform (GCP) using **Terraform**. The infrastructure consists of **Compute Engine** instances for Kafka and the consumer, **Cloud Run** for the React app and producer, **Cloud SQL** for MySQL, and a **VPC** with appropriate firewall rules.
