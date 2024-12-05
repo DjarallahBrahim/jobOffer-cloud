@@ -1,5 +1,27 @@
 # Changelog
 
+# Changelog
+
+## [2024-12-05] - Deployed GKE Cluster and Argo CD
+
+### Added
+- **GKE Cluster Deployment**
+  - Deployed a GKE cluster using Terraform with the following configurations:
+    - Private cluster in the `custom-vpc` network with dedicated subnets for services and pods.
+    - Configured a node pool with `e2-standard-2` machine types, auto-upgrade, and auto-repair enabled.
+    - Enabled network policies for enhanced pod communication security.
+  - Integrated service account for the cluster with roles for Cloud SQL, Pub/Sub, and logging/monitoring.
+
+- **Argo CD Deployment**
+  - Installed Argo CD into the GKE cluster using Terraform and Helm.
+  - Configured `argocd-server` service as a `LoadBalancer` type to allow external access.
+  - Verified external connectivity and management through Argo CD's web UI.
+  - Applied namespace isolation for Argo CD resources.
+
+### Notes
+- The GKE cluster was provisioned with sufficient pod and service IP ranges to avoid exhaustion.
+- Argo CD external access required adjustments to the `Service` manifest for `argocd-server`.
+
 
 ### Added [2024-11-20] - Deployed a Kafka consumer
 

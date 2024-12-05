@@ -33,16 +33,16 @@ resource "google_compute_subnetwork" "cluster_subnet" {
   name          = "cluster-subnet"
   region        = var.region
   network       = google_compute_network.default.id
-  ip_cidr_range = "10.0.3.0/18"
+  ip_cidr_range = "10.0.3.0/24"
   private_ip_google_access = true
 
   secondary_ip_range {
     range_name    = "services-range"
-    ip_cidr_range = "192.168.0.0/18"
+    ip_cidr_range = "10.11.0.0/21"
   }
 
   secondary_ip_range {
     range_name    = "pod-ranges"
-    ip_cidr_range = "192.168.1.0/18"
+    ip_cidr_range = "10.12.0.0/21"
   }
 }
