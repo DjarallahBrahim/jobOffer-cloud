@@ -98,7 +98,7 @@ resource "kubectl_manifest" "argocd" {
 
 
 data "kubectl_file_documents" "my-nginx-app" {
-    content = file("${path.module}/../../manifests/argocd/my-nginx.yaml")
+    content = file("${path.module}/../../manifests/argocd/jobstream.yaml")
 }
 
 resource "kubectl_manifest" "my-nginx-app" {

@@ -1,19 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-nginx
+  name: jobstream
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/bharatmicrosystems/argo-cd-example.git
+    repoURL: https://github.com/DjarallahBrahim/jobOffer-helm
+    path: jobstream
     targetRevision: HEAD
-    path: manifests/nginx
+    helm:
+      releaseName: jobstream
   destination:
     server: https://kubernetes.default.svc
     namespace: default
   syncPolicy:
     automated:
       selfHeal: true
+
+
