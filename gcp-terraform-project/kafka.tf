@@ -71,7 +71,7 @@ module "gce-container" {
 resource "google_compute_instance" "kafka_instance" {
   project      = var.project_id
   name         = "kafka-service"
-  machine_type = "e2-standard-2"  # Using e2-small as per your previous decision
+  machine_type = "e2-custom-medium-2816"  # Using e2-small as per your previous decision
   zone         = var.zone
 
   boot_disk {

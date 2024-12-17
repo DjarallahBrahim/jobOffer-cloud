@@ -1,0 +1,17 @@
+- name: Executing a Simple Command Locally
+  gather_facts: false
+  hosts: webservers
+  remote_user: samtyga
+  become: true
+  become_method: sudo
+  tasks:
+    - name: Ensure Nginx is installed
+      ansible.builtin.package:
+        name: nginx
+        state: absent
+
+    # - name: Start and enable Nginx service
+    #   ansible.builtin.service:
+    #     name: nginx
+    #     state: started
+    #     enabled: yes

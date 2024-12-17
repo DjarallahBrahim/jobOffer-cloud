@@ -1,0 +1,3 @@
+[webservers]
+192.168.1.109 ansible_user=samtyga ansible_ssh_pass="" ansible_python_interpreter=/usr/bin/python3
+localhost ansible_connection=local
