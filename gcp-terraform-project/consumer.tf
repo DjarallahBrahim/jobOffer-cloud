@@ -9,7 +9,7 @@ resource "google_compute_instance" "consumer_instance" {
 
   boot_disk {
     initialize_params {
-      image = module.gce-container.source_image  # Replace with your second image name
+      image = var.cos_image_name  # Replace with your second image name
     }
   }
 

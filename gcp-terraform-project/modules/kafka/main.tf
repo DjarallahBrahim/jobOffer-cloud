@@ -5,7 +5,7 @@ module "gce-container" {
   cos_image_name = var.cos_image_name
 
   container = {
-    image = "bitnami/kafka:latest"  # Kafka Docker image
+    image = var.docker_image  # Kafka Docker image
 
     env = [
   {
@@ -71,7 +71,7 @@ module "gce-container" {
 resource "google_compute_instance" "kafka_instance" {
   project      = var.project_id
   name         = "kafka-service"
-  machine_type = "e2-standard-2"  # Using e2-small as per your previous decision
+  machine_type = "e2-custom-medium-2816"  # Using e2-small as per your previous decision
   zone         = var.zone
 
   boot_disk {
@@ -81,8 +81,8 @@ resource "google_compute_instance" "kafka_instance" {
   }
 
   network_interface {
-    subnetwork_project = google_compute_network.default.id
-    subnetwork         = google_compute_subnetwork.compute_subnet.id  # Using the subnet created in step 1
+    subnetwork_project = var.network_id
+    subnetwork         = var.subnet_id  # Using the subnet created in step 1
     access_config {}  # No external IP by default
   }
 

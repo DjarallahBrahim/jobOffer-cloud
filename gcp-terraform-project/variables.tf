@@ -57,3 +57,10 @@ variable "service_account" {
   type        = string
   default = "cluster-jobstream@credible-bridge-440508-u0.iam.gserviceaccount.com"
 }
+
+
+variable "kafka_image_docker" {
+  description = "kafka_image_docker"
+  type        = string
+  default = "bitnami/kafka:latest"
+}

@@ -18,7 +18,8 @@ resource "google_dns_record_set" "kafka_dns_record" {
   type         = "A"
   ttl          = 300
 
-  rrdatas = [google_compute_instance.kafka_instance.network_interface[0].network_ip]
+  rrdatas = [module.kafka.kafka_instance_ip_adresse]
+
 }
 
 # MySQL DNS Record
@@ -29,5 +30,5 @@ resource "google_dns_record_set" "mysql_dns_record" {
   ttl          = 300                         # Time to Live for the DNS record
 
   # Use the private IP of the MySQL instance
-  rrdatas = [google_sql_database_instance.instance.private_ip_address]
+  rrdatas = [module.database.private_ip_address]
 }
