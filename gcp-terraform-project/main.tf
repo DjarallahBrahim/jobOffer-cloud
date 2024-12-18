@@ -68,20 +68,7 @@ module "frontend" {
   network_id       = google_compute_network.default.id
   subnet_id = google_compute_subnetwork.cloudrun_subnet.id
 }
-moved {
-  from = google_cloud_run_v2_service.frontend
-  to   = module.front.google_cloud_run_v2_service.frontend
-}
 
-moved {
-  from = google_cloud_run_service_iam_policy.public_access
-  to   = module.front.google_cloud_run_service_iam_policy.public_access
-}
-
-moved {
-  from = google_iam_policy.public_iam_policy
-  to   = module.front.google_iam_policy.public_iam_policy
-}
 # module "gke" {
 #   source            = "./modules/gke" # Path to your GKE module
 #   project_id        = var.project_id
