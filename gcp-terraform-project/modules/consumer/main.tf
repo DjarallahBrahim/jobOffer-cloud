@@ -14,8 +14,8 @@ resource "google_compute_instance" "consumer_instance" {
   }
 
   network_interface {
-    subnetwork_project = google_compute_network.default.id
-    subnetwork         = google_compute_subnetwork.compute_subnet.id
+    subnetwork_project = var.network_id
+    subnetwork         = var.subnet_id
     access_config {}
   }
 

@@ -8,8 +8,8 @@ resource "google_cloud_run_v2_service" "producer" {
 
     vpc_access{
       network_interfaces {
-        network = google_compute_network.default.id
-        subnetwork = google_compute_subnetwork.cloudrun_subnet.id
+        network = var.network_id
+        subnetwork = var.subnet_id
         tags = ["producer-service"]
       }
     }
